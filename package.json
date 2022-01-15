@@ -1,0 +1,6 @@
+{
+    "name": "budget-planner",
+    "workspaces": [
+        "packages/*"
+    ]
+}
