@@ -3,7 +3,7 @@ const cors = require("cors");
 var sql = require("mssql");
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -28,6 +28,8 @@ var config = {
   },
 };
 
+console.log(config);
+
 const sqlConnect = () => {
   return new Promise((resolve, reject) => {
     sql.connect(config, (err) => {
@@ -40,6 +42,10 @@ const sqlConnect = () => {
     });
   });
 };
+
+app.get("/", (req, res) => {
+  res.send("Welcome to Budget Planner Api");
+});
 
 app.post("/newUser", async (req, res) => {
   console.log(req.body);
