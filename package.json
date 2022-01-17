@@ -2,5 +2,8 @@
     "name": "budget-planner",
     "workspaces": [
         "packages/*"
-    ]
+    ],
+    "devDependencies": {
+        "mini-css-extract-plugin": "2.4.5"
+    }
 }
