@@ -18,7 +18,7 @@ import { ButtonGroupForGraphs } from "../ButtonGroupForGraphs";
 import styled from "styled-components";
 import { SelectMonthToDisplay } from "../SelectMonthToDisplay";
 
-export const Content = () => {
+export const ContentToBeDeleted = () => {
   const userEmail = useRecoilValue(loggedInUserState);
   const [data, setData] = React.useState([]);
   // const [data, setData] = useRecoilState(userData);

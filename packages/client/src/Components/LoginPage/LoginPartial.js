@@ -55,7 +55,7 @@ export const LoginPartial = () => {
           name: data.FirstName,
         });
 
-        navigate("/content");
+        navigate("/dashboard");
       });
   };
 

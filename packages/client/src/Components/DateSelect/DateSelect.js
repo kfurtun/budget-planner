@@ -15,19 +15,18 @@ export const DateSelect = (props) => {
           max="2999-12-31"
         ></input>
       )} */}
-      {props.selectOnChange && (
-        <LocalizationProvider dateAdapter={DateAdapter}>
-          <DesktopDatePicker
-            label="Date"
-            inputFormat="dd/MM/yyyy"
-            value={props.value}
-            // onChange={handleChange}
-            minDate={new Date("1950-01-01")}
-            onChange={props.onDateChanged}
-            renderInput={(params) => <TextField {...params} />}
-          />
-        </LocalizationProvider>
-      )}
+
+      <LocalizationProvider dateAdapter={DateAdapter}>
+        <DesktopDatePicker
+          label="Date"
+          inputFormat="dd/MM/yyyy"
+          value={props.value}
+          // onChange={handleChange}
+          minDate={new Date("1950-01-01")}
+          onChange={props.onDateChanged}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </LocalizationProvider>
     </Div>
   );
 };

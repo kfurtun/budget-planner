@@ -77,7 +77,6 @@ export const MainPageTemplate = (props) => {
 
   return (
     <ThemeProvider theme={mdTheme}>
-      {props.children}
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -107,11 +106,11 @@ export const MainPageTemplate = (props) => {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
+            {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

@@ -1,1 +1,1 @@
-export * from "./LineChart";
+export { LineChart } from "./LineChart";

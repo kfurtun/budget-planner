@@ -26,3 +26,8 @@ export const currency = atom({
   key: "currency",
   default: "$",
 });
+
+export const triggerFetchState = atom({
+  key: "triggerFetch",
+  default: false,
+});

@@ -17,7 +17,8 @@ import { sum } from "mathjs";
 import { BalanceBanner } from "../BalanceBanner";
 
 export const ShowAll = (props) => {
-  const result = props.copiedData.reduce(function (total, currentValue) {
+  const copiedData = [...props.data];
+  const result = copiedData.reduce(function (total, currentValue) {
     total[currentValue.Year] = total[currentValue.Year] || [];
     total[currentValue.Year].push(currentValue);
     return total;

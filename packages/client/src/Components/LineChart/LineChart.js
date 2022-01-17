@@ -45,6 +45,7 @@ export const LineChart = (props) => {
   });
 
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     plugins: {
       legend: {
