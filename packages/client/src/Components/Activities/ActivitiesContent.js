@@ -15,6 +15,7 @@ export const ActivitiesContent = () => {
   const [open, setOpen] = React.useState(false);
   const [triggerFetch, setTriggerFetch] = useRecoilState(triggerFetchState);
   const userEmail = useRecoilValue(loggedInUserState);
+
   React.useEffect(() => {
     fetch("http://127.0.0.1:5000/onlineUser?id=" + userEmail.id)
       .then((response) => {
@@ -25,7 +26,8 @@ export const ActivitiesContent = () => {
         }
       })
       .then((userData) => setData(userData));
-  }, [triggerFetch]);
+  }, [setData, triggerFetch, userEmail.id]);
+
   const addItem = () => {
     setOpen(true);
   };

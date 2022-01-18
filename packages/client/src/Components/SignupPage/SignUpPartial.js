@@ -61,7 +61,7 @@ export function SignUpPartial() {
         }),
       })
         .then((response) => {
-          if (response.status == 400) {
+          if (response.status === 400) {
             setInputState({
               ...inputState,
               errorBox: true,

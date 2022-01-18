@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import React from "react";
 import {
   Chart as ChartJS,
@@ -33,6 +35,7 @@ export const ChartForIncome = (props) => {
         salaryArr.push(userData.Input);
         break;
       case "Awards":
+        /* eslint-disable no-unused-vars */
         awardsArr.push(userData.Input);
         break;
       case "Sale":

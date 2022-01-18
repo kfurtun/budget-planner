@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -53,7 +54,7 @@ export const Content = () => {
         }
       })
       .then((userData) => setData(userData));
-  }, [triggerFetch]);
+  }, [setData, triggerFetch, userEmail.id]);
   console.log(data);
   //   const addItem = () => {
   //     setOpen(true);

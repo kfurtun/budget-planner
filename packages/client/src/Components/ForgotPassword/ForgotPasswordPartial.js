@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,9 +11,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Copyright } from "../Copyright";
-import { useNavigate, Link } from "react-router-dom";
-// import { loggedInUserState } from "../states";
-// import { useRecoilState } from "recoil";
+import { Link } from "react-router-dom";
+
 const theme = createTheme();
 export const ForgotPasswordPartial = () => {
   const [email, setEmail] = React.useState("");
