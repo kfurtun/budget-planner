@@ -1,27 +1,27 @@
 import React from "react";
-import { loggedInUserState } from "../states";
-import { useRecoilValue } from "recoil";
+import { loggedInUserState, triggerFetchState } from "../states";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export const DeleteButton = (props) => {
   const user = useRecoilValue(loggedInUserState);
-  const onDeleteClicked = () => {
-    // const newData = [...props.data];
-    // newData.splice(props.index, 1);
-    // props.setData(newData);
-    // console.log(props.data[props.index].Id);
+  const [triggerFetch, setTriggerFetch] = useRecoilState(triggerFetchState);
 
+  const onDeleteClicked = () => {
     fetch("http://localhost:5000/deleteData", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        itemId: props.data[props.index].Id,
+        itemId: props.id,
         userId: user.id,
       }),
-    }).then(() => props.setTriggerFetch(!props.triggerFetch));
+    }).then(() => {
+      setTriggerFetch(!triggerFetch);
+    });
+    console.log(props.id);
   };
 
   return (

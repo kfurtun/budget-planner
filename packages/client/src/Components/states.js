@@ -9,14 +9,6 @@ export const loggedInUserState = atom({
   },
 });
 
-export const selectedMonthAndYearToDisplay = atom({
-  key: "selectedMonthAndYearToDisplay",
-  default: {
-    month: "",
-    year: "",
-  },
-});
-
 export const userData = atom({
   key: "userData",
   default: [],
@@ -30,4 +22,9 @@ export const currency = atom({
 export const triggerFetchState = atom({
   key: "triggerFetch",
   default: false,
+});
+
+export const drawerHeaderText = atom({
+  key: "drawerHeaderText",
+  default: "Dashboard",
 });

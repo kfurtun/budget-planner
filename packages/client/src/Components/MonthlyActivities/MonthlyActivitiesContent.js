@@ -11,39 +11,39 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { selectedMonthAndYearToDisplay, userData } from "../states";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { triggerFetchState } from "../states";
+import { triggerFetchState, loggedInUserState } from "../states";
 
 import { SelectMonthToDisplay } from "../SelectMonthToDisplay";
+import { useDataFetch, useDataSorter } from "../customHooks/customHooks";
 
 export const MonthlyActivitiesContent = (props) => {
-  const selectedDate = useRecoilValue(selectedMonthAndYearToDisplay);
-  const data = useRecoilValue(userData);
-  const [triggerFetch, setTriggerFetch] = useRecoilState(triggerFetchState);
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [data, setData] = useRecoilState(userData);
+
+  const triggerFetch = useRecoilValue(triggerFetchState);
+  const user = useRecoilValue(loggedInUserState);
+
+  useDataFetch(setData, triggerFetch, user.id);
+  console.log(selectedDate);
   const copiedData = [...data];
-  copiedData.sort(function (a, b) {
-    if (a.Year !== b.Year) {
-      return b.Year - a.Year;
-    } else if (a.Year === b.Year && a.Month !== b.Month) {
-      return b.Month - a.Month;
-    } else {
-      return b.Day - a.Day;
-    }
-  });
+  useDataSorter(copiedData);
+
   const arrOfSelectedDate = copiedData.filter(
     (data) =>
-      data.Year === selectedDate.year && data.Month === selectedDate.month
+      data.Year === selectedDate.getFullYear() &&
+      data.Month === selectedDate.getMonth() + 1
   );
-  console.log(selectedDate);
-  // const arrToBeDisplayed =
-  //   selectedDate.month === "" && selectedDate.year === ""
-  //     ? copiedData
-  //     : arrOfSelectedDate;
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Grid container>
-        <SelectMonthToDisplay />
+        <Paper>
+          <SelectMonthToDisplay
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
+        </Paper>
       </Grid>
-      <TableContainer sx={{ maxWidth: 1000 }} component={Paper}>
+      <TableContainer sx={{ maxWidth: 1000, marginTop: 5 }} component={Paper}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -57,10 +57,10 @@ export const MonthlyActivitiesContent = (props) => {
           <TableBody>
             {arrOfSelectedDate.map((row, index) => {
               const showDate = `${row.Day}-${row.Month}-${row.Year}`;
-
+              console.log(row.Id);
               return (
                 <TableRow
-                  key={row.name}
+                  key={index}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell>{row.Type}</TableCell>
@@ -74,13 +74,7 @@ export const MonthlyActivitiesContent = (props) => {
                     <TableCell>{`$ ${row.Input}`}</TableCell>
                   )}
                   <TableCell style={{ width: "150px" }}>
-                    <DeleteButton
-                      index={index}
-                      data={copiedData}
-                      setData={props.setData}
-                      setTriggerFetch={setTriggerFetch}
-                      triggerFetch={triggerFetch}
-                    />
+                    <DeleteButton id={row.Id} />
                   </TableCell>
                 </TableRow>
               );

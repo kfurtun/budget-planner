@@ -11,15 +11,19 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import LogoutIcon from "@mui/icons-material/Logout";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+
 import { mainListItems, secondaryListItems } from "./listItems";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { loggedInUserState } from "../states";
 // import Chart from "./Chart";
 // import Deposits from "./Deposits";
 // import Orders from "./Orders";
@@ -76,6 +80,25 @@ export const MainPageTemplate = (props) => {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const [user, setUser] = useRecoilState(loggedInUserState);
+  let navigate = useNavigate();
+
+  const handleClick = () => {
+    setUser({ ...user, id: "", email: "", name: "" });
+    navigate("/");
+  };
+
+  let header = "";
+  const name = props.children.type.name;
+  if (name === "ActivitiesContent") {
+    header = "Activities";
+  } else if (name === "MonthlyActivitiesContent") {
+    header = "Monthly Activities";
+  } else if (name === "GraphsContent") {
+    header = "Graphs";
+  } else {
+    header = "Dashboard";
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -106,7 +129,7 @@ export const MainPageTemplate = (props) => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {header}
             </Typography>
             {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -131,7 +154,15 @@ export const MainPageTemplate = (props) => {
           <Divider />
           <List>{mainListItems}</List>
           <Divider />
-          <List>{secondaryListItems}</List>
+          <List>
+            {secondaryListItems}
+            <ListItem button onClick={handleClick}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItem>
+          </List>
         </Drawer>
         <Box
           component="main"

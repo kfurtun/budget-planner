@@ -9,30 +9,24 @@ import { loggedInUserState } from "../states";
 import Paper from "@mui/material/Paper";
 import { userData } from "../states";
 import { triggerFetchState } from "../states";
+import { useDataFetch } from "../customHooks/customHooks";
+import { DatePickerForLineGraph } from "../DatePickerForLineGraph";
 
 export const ActivitiesContent = () => {
+  const [valueOfDateForLineGraph, setValueOfDateForLineGraph] = React.useState(
+    new Date()
+  );
   const [data, setData] = useRecoilState(userData);
   const [open, setOpen] = React.useState(false);
   const [triggerFetch, setTriggerFetch] = useRecoilState(triggerFetchState);
-  const userEmail = useRecoilValue(loggedInUserState);
-
-  React.useEffect(() => {
-    fetch("http://127.0.0.1:5000/onlineUser?id=" + userEmail.id)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          console.log("yanlis username password");
-        }
-      })
-      .then((userData) => setData(userData));
-  }, [setData, triggerFetch, userEmail.id]);
+  const user = useRecoilValue(loggedInUserState);
+  useDataFetch(setData, triggerFetch, user.id);
 
   const addItem = () => {
     setOpen(true);
   };
   const onSave = (entry) => {
-    const itemsToBeSent = { entry, id: userEmail.id };
+    const itemsToBeSent = { entry, id: user.id };
     console.log(JSON.stringify(itemsToBeSent));
     fetch("http://localhost:5000/insertUserData", {
       method: "POST",
@@ -40,12 +34,13 @@ export const ActivitiesContent = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(itemsToBeSent),
+    }).then(() => {
+      setTriggerFetch(!triggerFetch);
     });
-    //.then(() => setTriggerFetch(true));
   };
   const dialogOff = () => {
     setOpen(false);
-    setTriggerFetch(!triggerFetch);
+    // setTriggerFetch(!triggerFetch);
   };
 
   return (
@@ -60,25 +55,22 @@ export const ActivitiesContent = () => {
           <OpenAddDialog open={open} onClose={dialogOff} onSave={onSave} />
         )}
       </Grid>
-      <Grid container>
-        <Paper
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            width: 900,
-            marginTop: 5,
-          }}
-        >
-          {userEmail && (
-            <ShowAll
-              data={data}
-              setTriggerFetch={setTriggerFetch}
-              triggerFetch={triggerFetch}
-            />
-          )}
+      <Grid container sx={{ marginTop: 5 }}>
+        <Paper>
+          <DatePickerForLineGraph
+            valueOfDateForLineGraph={valueOfDateForLineGraph}
+            setValueOfDateForLineGraph={setValueOfDateForLineGraph}
+          />
         </Paper>
       </Grid>
+
+      {user && (
+        <ShowAll
+          data={data}
+          valueOfDateForLineGraph={valueOfDateForLineGraph}
+          setValueOfDateForLineGraph={setValueOfDateForLineGraph}
+        />
+      )}
     </Container>
   );
 };

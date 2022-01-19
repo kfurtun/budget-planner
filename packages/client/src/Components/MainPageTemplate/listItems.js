@@ -8,7 +8,8 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
-import AssignmentIcon from "@mui/icons-material/Assignment";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { Link } from "react-router-dom";
 
 export const mainListItems = (
@@ -36,12 +37,12 @@ export const mainListItems = (
     >
       <ListItem button>
         <ListItemIcon>
-          <PeopleIcon />
+          <DateRangeIcon />
         </ListItemIcon>
         <ListItemText primary="Monthly Activities" />
       </ListItem>
     </Link>
-    <Link to="/graphs">
+    <Link to="/graphs" style={{ textDecoration: "none", color: "black" }}>
       <ListItem button>
         <ListItemIcon>
           <BarChartIcon />
@@ -49,36 +50,22 @@ export const mainListItems = (
         <ListItemText primary="Graphs" />
       </ListItem>
     </Link>
-
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItem>
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
     <ListItem button>
+      <ListItemIcon>
+        <AccountBoxIcon />
+      </ListItemIcon>
+      <ListItemText primary="My Account" />
+    </ListItem>
+    {/* <ListItem button onClick={handleClick}>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItem>
+      <ListItemText primary="Logout" />
+    </ListItem> */}
   </div>
 );
