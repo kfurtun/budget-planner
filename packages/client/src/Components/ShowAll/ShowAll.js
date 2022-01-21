@@ -56,6 +56,7 @@ export const ShowAll = (props) => {
           width: 200,
           color: "white",
           fontWeight: "bold",
+          borderRadius: 3,
         }}
       >
         <span>{`Balance: ${currencyType} ${balance}`}</span>

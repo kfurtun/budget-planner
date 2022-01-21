@@ -8,7 +8,6 @@ import styled from "styled-components";
 export const DatePickerForPolarChart = (props) => {
   return (
     <Div>
-      {" "}
       <LocalizationProvider dateAdapter={DateAdapter}>
         <DatePicker
           views={["year", "month"]}

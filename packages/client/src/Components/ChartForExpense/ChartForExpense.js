@@ -108,6 +108,7 @@ export const ChartForExpense = (props) => {
   // ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
   ChartJS.register(ArcElement, Tooltip, Legend);
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     plugins: {
       legend: {
@@ -115,6 +116,7 @@ export const ChartForExpense = (props) => {
       },
       title: {
         display: true,
+        fontSize: 18,
 
         text: `${
           months[props.valueOfDateForPolarGraph.getMonth()]

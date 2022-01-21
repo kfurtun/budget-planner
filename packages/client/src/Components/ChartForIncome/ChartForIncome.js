@@ -74,6 +74,7 @@ export const ChartForIncome = (props) => {
   ChartJS.register(ArcElement, Tooltip, Legend);
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "left",

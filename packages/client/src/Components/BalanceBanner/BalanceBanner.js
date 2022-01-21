@@ -36,6 +36,8 @@ const Span = styled.span`
   justify-content: center;
   align-items: center;
   width: ${(props) => props.width};
+  border-radius: ${(props) =>
+    props.color === "#2e7d32" ? "6px 0 0 6px" : "0 6px 6px 0"};
 `;
 
 const Div = styled.div`
