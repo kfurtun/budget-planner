@@ -83,11 +83,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: client-app
-          path: ~/download/client-app
-
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: ~/
+          path: /download/client-app
 
       - name: "Deploy Client to Azure"
         id: builddeploy
