@@ -46,11 +46,17 @@ jobs:
           npm install
           npm run build --workspaces
 
-      - name: Upload artifact for deployment job
+      - name: Upload artifact for deployment job (server)
         uses: actions/upload-artifact@v2
         with:
           name: node-app
           path: ./packages/server/build
+
+      - name: Upload artifact for deployment job (client)
+        uses: actions/upload-artifact@v2
+        with:
+          name: client-app
+          path: ./packages/client/build
 
   deploy:
     runs-on: ubuntu-latest
