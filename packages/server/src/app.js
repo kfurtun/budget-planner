@@ -17,6 +17,7 @@ const insertInput = require("./insertInput");
 const getUserData = require("./getUserData");
 const deleteUserData = require("./deleteUserData");
 const getUserDataBySelectedDate = require("./getUserDataBySelectedDate");
+const changeUserEmail = require("./changeUserEmail");
 
 var config = {
   user: process.env.db_username, //default is sa
@@ -84,6 +85,27 @@ app.post("/insertUserData", async (req, res) => {
 
   res.sendStatus(201);
 });
+app.post("/changeUserEmail", async (req, res) => {
+  console.log(req.body);
+  const { email, id } = req.body;
+  console.log("Connection Successful !");
+
+  const users = await getUsersByEmail(email, sqlConnect);
+  if (users.recordset.length === 0) {
+    await changeUserEmail(email, id, sqlConnect);
+    res.sendStatus(201);
+  } else res.sendStatus(400);
+});
+
+app.post("/changeUserPassword", async (req, res) => {
+  console.log(req.body);
+  const { password, id } = req.body;
+  console.log("Connection Successful !");
+
+  const result = await changeUserEmail(email, id, sqlConnect);
+  console.log(result);
+  res.sendStatus(201);
+});
 
 app.get("/login", async (req, res) => {
   console.log("Connection Successful !");
@@ -107,19 +129,6 @@ app.get("/onlineUser", async (req, res) => {
   const userData = await getUserData(req.query.id, sqlConnect);
   res.send(JSON.stringify(userData.recordset));
 });
-
-// app.get("/displayMonthAndYear", async (req, res) => {
-//   console.log("Connection Successful !");
-
-//   const userData = await getUserDataBySelectedDate(
-//     req.query.month,
-//     req.query.year,
-//     req.query.id,
-//     sqlConnect
-//   );
-
-//   res.send(JSON.stringify(userData.recordset));
-// });
 
 app.delete("/deleteData", async (req, res) => {
   console.log("Connection Successful !");

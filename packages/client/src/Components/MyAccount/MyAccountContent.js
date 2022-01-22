@@ -3,15 +3,18 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 import { useRecoilValue } from "recoil";
 import { loggedInUserState } from "../states";
 import { PasswordBox } from "../PasswordBox";
 import { EmailBox } from "../EmailBox";
+import { useNavigate } from "react-router-dom";
 
 export const MyAccountContent = () => {
   const user = useRecoilValue(loggedInUserState);
-
+  let navigate = useNavigate();
   const [input, setInput] = React.useState({
     currentEmail: "",
     newEmail: "",
@@ -19,7 +22,39 @@ export const MyAccountContent = () => {
     currentPassword: "",
     newPassword: "",
     confirmNewPassword: "",
+    errorText: "",
+    showErrorText: false,
   });
+
+  const changeEmailClicked = () => {
+    if (
+      input.currentEmail === user.email &&
+      input.newEmail === input.confirmNewEmail
+    ) {
+      const itemsToBeSent = { email: input.newEmail, id: user.id };
+      fetch("http://localhost:5000/changeUserEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(itemsToBeSent),
+      }).then((response) => {
+        if (response.ok) {
+          setInput({ ...input, showErrorText: false });
+          navigate("/");
+        } else
+          setInput({
+            ...input,
+            showErrorText: true,
+            errorText: "This email is already being used!",
+          });
+      });
+    }
+  };
+
+  //   const changePasswordClicked=()=>{
+
+  //   }
 
   return (
     <Grid
@@ -89,6 +124,24 @@ export const MyAccountContent = () => {
               marginLeft={8}
             />
           </Grid>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              marginBottom: 5,
+              justifyContent: "flex-end",
+              marginRight: 5,
+              alignContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Box sx={{ marginRight: 3 }}>
+              {input.showErrorText && input.errorText}
+            </Box>
+            <Button variant="contained" onClick={changeEmailClicked}>
+              Change Email
+            </Button>
+          </Grid>
 
           <Grid item sx={{ display: "flex", marginBottom: 5 }}>
             <PasswordBox
@@ -99,7 +152,7 @@ export const MyAccountContent = () => {
               input={input}
             />
           </Grid>
-          <Grid item sx={{ display: "flex" }}>
+          <Grid item sx={{ display: "flex", marginBottom: 5 }}>
             <PasswordBox
               name="New Password"
               width={195}
@@ -115,6 +168,24 @@ export const MyAccountContent = () => {
               input={input}
               stateKey="confirmNewPassword"
             />
+          </Grid>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              marginBottom: 5,
+              justifyContent: "flex-end",
+              marginRight: 5,
+              alignContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Box sx={{ marginRight: 3 }}>
+              {input.showErrorText && input.errorText}
+            </Box>
+            {/* <Button variant="contained" onClick={changePasswordClicked}>
+              Change Password
+            </Button> */}
           </Grid>
         </Paper>
       </Grid>
