@@ -11,7 +11,7 @@ module.exports = getUsersByEMailAndPassword = async (
       .input("email", email)
       .input("password", password)
       .query(
-        "select [Id],[FirstName] from [Budget.Users] where Email=@email and Password=@password",
+        "select [Id],[FirstName],[LastName] from [Budget.Users] where Email=@email and Password=@password",
         (err, result) => {
           if (err) {
             console.log(err);

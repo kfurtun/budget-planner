@@ -5,7 +5,7 @@ module.exports = getUsersByEmail = async (email, sqlConnect) => {
     new sql.Request()
       .input("email", email)
       .query(
-        "select [Email],[Id],[FirstName] from [Budget.Users] where [Budget.Users].[Email] = @email",
+        "select [Email],[Id],[FirstName],[LastName] from [Budget.Users] where [Budget.Users].[Email] = @email",
         (err, result) => {
           if (err) {
             console.log(err);
