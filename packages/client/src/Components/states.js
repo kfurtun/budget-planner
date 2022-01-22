@@ -6,6 +6,7 @@ export const loggedInUserState = atom({
     email: "",
     id: "",
     name: "",
+    lastName: "",
   },
 });
 

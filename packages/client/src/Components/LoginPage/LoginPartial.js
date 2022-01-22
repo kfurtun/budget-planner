@@ -53,6 +53,7 @@ export const LoginPartial = () => {
           email: input.email,
           id: data.Id,
           name: data.FirstName,
+          lastName: data.LastName,
         });
 
         navigate("/dashboard");

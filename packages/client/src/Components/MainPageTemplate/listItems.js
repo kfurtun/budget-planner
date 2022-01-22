@@ -55,12 +55,15 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListItem button>
-      <ListItemIcon>
-        <AccountBoxIcon />
-      </ListItemIcon>
-      <ListItemText primary="My Account" />
-    </ListItem>
+    <Link to="/myAccount" style={{ textDecoration: "none", color: "black" }}>
+      <ListItem button>
+        <ListItemIcon>
+          <AccountBoxIcon />
+        </ListItemIcon>
+        <ListItemText primary="My Account" />
+      </ListItem>
+    </Link>
+
     {/* <ListItem button onClick={handleClick}>
       <ListItemIcon>
         <AssignmentIcon />

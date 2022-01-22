@@ -96,6 +96,8 @@ export const MainPageTemplate = (props) => {
     header = "Monthly Activities";
   } else if (name === "GraphsContent") {
     header = "Graphs";
+  } else if (name === "MyAccount") {
+    header = "My Account";
   } else {
     header = "Dashboard";
   }
@@ -131,11 +133,9 @@ export const MainPageTemplate = (props) => {
             >
               {header}
             </Typography>
-            {/* <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
+            {/* <Typography component="h1" variant="h6" color="inherit" noWrap>
+              Welcome {user.name}
+            </Typography> */}
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -147,6 +147,16 @@ export const MainPageTemplate = (props) => {
               px: [1],
             }}
           >
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 2 }}
+            >
+              Welcome {user.name}
+            </Typography>
+
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>

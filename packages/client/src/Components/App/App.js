@@ -10,6 +10,7 @@ import { DashBoard } from "../DashBoard";
 import { Activities } from "../Activities";
 import { MonthlyActivities } from "../MonthlyActivities";
 import { Graphs } from "../Graphs";
+import { MyAccount } from "../MyAccount";
 
 export function App() {
   return (
@@ -25,6 +26,7 @@ export function App() {
           element={<MonthlyActivities />}
         ></Route>
         <Route path="/graphs" element={<Graphs />}></Route>
+        <Route path="/myAccount" element={<MyAccount />}></Route>
       </Routes>
     </Router>
 
