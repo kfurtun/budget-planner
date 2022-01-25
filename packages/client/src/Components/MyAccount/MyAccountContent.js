@@ -52,9 +52,53 @@ export const MyAccountContent = () => {
     }
   };
 
-  //   const changePasswordClicked=()=>{
-
-  //   }
+  const changePasswordClicked = (event) => {
+    event.preventDefault();
+    fetch(
+      "http://127.0.0.1:5000/verifyUser?id=" +
+        user.id +
+        "&password=" +
+        input.password
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        console.log("yanlis username password");
+        return undefined;
+      })
+      .then((data) => {
+        if (!data) {
+          setInput({
+            ...input,
+            showErrorText: true,
+            errorText: "The password is not correct!",
+          });
+          return;
+        }
+        if (input.newPassword === input.confirmNewPassword) {
+          const itemsToBeSent = { password: input.newPassword, id: user.id };
+          fetch("http://localhost:5000/changeUserPassword", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(itemsToBeSent),
+          }).then((response) => {
+            if (response.ok) {
+              setInput({ ...input, showErrorText: false });
+              navigate("/");
+            }
+          });
+        } else {
+          setInput({
+            ...input,
+            showErrorText: true,
+            errorText: "This password does not match!",
+          });
+        }
+      });
+  };
 
   return (
     <Grid
@@ -183,9 +227,9 @@ export const MyAccountContent = () => {
             <Box sx={{ marginRight: 3 }}>
               {input.showErrorText && input.errorText}
             </Box>
-            {/* <Button variant="contained" onClick={changePasswordClicked}>
+            <Button variant="contained" onClick={changePasswordClicked}>
               Change Password
-            </Button> */}
+            </Button>
           </Grid>
         </Paper>
       </Grid>

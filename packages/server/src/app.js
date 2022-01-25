@@ -18,7 +18,8 @@ const getUserData = require("./getUserData");
 const deleteUserData = require("./deleteUserData");
 const getUserDataBySelectedDate = require("./getUserDataBySelectedDate");
 const changeUserEmail = require("./changeUserEmail");
-
+const verifyUserByIdAndPassword = require("./verifyUserByIdAndPassword");
+const changeUserPassword = require("./changeUserPassword");
 var config = {
   user: process.env.db_username, //default is sa
   password: process.env.db_password,
@@ -102,9 +103,19 @@ app.post("/changeUserPassword", async (req, res) => {
   const { password, id } = req.body;
   console.log("Connection Successful !");
 
-  const result = await changeUserEmail(email, id, sqlConnect);
+  const result = await changeUserPassword(password, id, sqlConnect);
   console.log(result);
   res.sendStatus(201);
+});
+
+app.get("/verifyUser", async (req, res) => {
+  console.log("Connection Successful !");
+  const userData = await verifyUserByIdAndPassword(
+    req.query.id,
+    req.query.password,
+    sqlConnect
+  );
+  res.send(JSON.stringify(userData.recordset));
 });
 
 app.get("/login", async (req, res) => {
