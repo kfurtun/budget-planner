@@ -32,8 +32,6 @@ var config = {
   },
 };
 
-console.log(process.env.bp_PORT);
-
 const sqlConnect = () => {
   return new Promise((resolve, reject) => {
     sql.connect(config, (err) => {
