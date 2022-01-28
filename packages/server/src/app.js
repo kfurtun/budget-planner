@@ -32,7 +32,7 @@ var config = {
   },
 };
 
-console.log(config);
+console.log(process.env.bp_PORT);
 
 const sqlConnect = () => {
   return new Promise((resolve, reject) => {
