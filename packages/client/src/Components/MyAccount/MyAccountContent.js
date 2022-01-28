@@ -11,6 +11,7 @@ import { loggedInUserState } from "../states";
 import { PasswordBox } from "../PasswordBox";
 import { EmailBox } from "../EmailBox";
 import { useNavigate } from "react-router-dom";
+import { ApiUrl } from "../../Constants";
 
 export const MyAccountContent = () => {
   const user = useRecoilValue(loggedInUserState);
@@ -32,7 +33,7 @@ export const MyAccountContent = () => {
       input.newEmail === input.confirmNewEmail
     ) {
       const itemsToBeSent = { email: input.newEmail, id: user.id };
-      fetch("http://localhost:5000/changeUserEmail", {
+      fetch(`${ApiUrl}/changeUserEmail`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,12 +55,7 @@ export const MyAccountContent = () => {
 
   const changePasswordClicked = (event) => {
     event.preventDefault();
-    fetch(
-      "http://127.0.0.1:5000/verifyUser?id=" +
-        user.id +
-        "&password=" +
-        input.password
-    )
+    fetch(`${ApiUrl}/verifyUser?id=` + user.id + "&password=" + input.password)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -78,7 +74,7 @@ export const MyAccountContent = () => {
         }
         if (input.newPassword === input.confirmNewPassword) {
           const itemsToBeSent = { password: input.newPassword, id: user.id };
-          fetch("http://localhost:5000/changeUserPassword", {
+          fetch(`${ApiUrl}/changeUserPassword`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

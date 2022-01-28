@@ -1,4 +1,5 @@
 import React from "react";
+import { ApiUrl } from "../../Constants";
 
 export const useDataSorter = (array) => {
   array.sort(function (a, b) {
@@ -14,7 +15,7 @@ export const useDataSorter = (array) => {
 
 export const useDataFetch = (setData, triggerFetch, userId) => {
   React.useEffect(() => {
-    fetch("http://127.0.0.1:5000/onlineUser?id=" + userId)
+    fetch(`${ApiUrl}/onlineUser?id=` + userId)
       .then((response) => {
         if (response.ok) {
           return response.json();

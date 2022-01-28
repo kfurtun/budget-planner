@@ -11,6 +11,7 @@ import { userData } from "../states";
 import { triggerFetchState } from "../states";
 import { useDataFetch } from "../customHooks/customHooks";
 import { DatePickerForLineGraph } from "../DatePickerForLineGraph";
+import { ApiUrl } from "../../Constants";
 
 export const ActivitiesContent = () => {
   const [valueOfDateForLineGraph, setValueOfDateForLineGraph] = React.useState(
@@ -28,7 +29,7 @@ export const ActivitiesContent = () => {
   const onSave = (entry) => {
     const itemsToBeSent = { entry, id: user.id };
     console.log(JSON.stringify(itemsToBeSent));
-    fetch("http://localhost:5000/insertUserData", {
+    fetch(`${ApiUrl}/insertUserData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

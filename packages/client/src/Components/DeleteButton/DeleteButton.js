@@ -3,13 +3,14 @@ import { loggedInUserState, triggerFetchState } from "../states";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { ApiUrl } from "../../Constants";
 
 export const DeleteButton = (props) => {
   const user = useRecoilValue(loggedInUserState);
   const [triggerFetch, setTriggerFetch] = useRecoilState(triggerFetchState);
 
   const onDeleteClicked = () => {
-    fetch("http://localhost:5000/deleteData", {
+    fetch(`${ApiUrl}/deleteData`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

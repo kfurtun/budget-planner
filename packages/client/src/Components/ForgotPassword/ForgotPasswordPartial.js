@@ -12,7 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Copyright } from "../Copyright";
 import { Link } from "react-router-dom";
-
+import { ApiUrl } from "../../Constants";
 const theme = createTheme();
 export const ForgotPasswordPartial = () => {
   const [email, setEmail] = React.useState("");
@@ -21,7 +21,16 @@ export const ForgotPasswordPartial = () => {
     setEmail(event.target.value);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    fetch(`${ApiUrl}/users?email=` + email).then((response) => {
+      if (response.ok) {
+        console.log("oldu bu is");
+        return response.json();
+      }
+      console.log("yanlis username password");
+      return undefined;
+    });
+  };
   return (
     <>
       <ThemeProvider theme={theme}>

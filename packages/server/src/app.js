@@ -20,6 +20,8 @@ const getUserDataBySelectedDate = require("./getUserDataBySelectedDate");
 const changeUserEmail = require("./changeUserEmail");
 const verifyUserByIdAndPassword = require("./verifyUserByIdAndPassword");
 const changeUserPassword = require("./changeUserPassword");
+const sendEmail = require("./sendEmail");
+
 var config = {
   user: process.env.db_username, //default is sa
   password: process.env.db_password,
@@ -116,6 +118,13 @@ app.get("/verifyUser", async (req, res) => {
     sqlConnect
   );
   res.send(JSON.stringify(userData.recordset));
+});
+
+app.get("/users", async (req, res) => {
+  console.log("Connection Successful !");
+  const result = await sendEmail(req.query.email);
+  console.log(result);
+  res.send();
 });
 
 app.get("/login", async (req, res) => {

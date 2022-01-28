@@ -15,6 +15,7 @@ import { Copyright } from "../Copyright";
 import { useNavigate, Link } from "react-router-dom";
 import { loggedInUserState } from "../states";
 import { useRecoilState } from "recoil";
+import { ApiUrl } from "../../Constants";
 
 const theme = createTheme();
 
@@ -48,7 +49,7 @@ export function SignUpPartial() {
         ...inputState,
         errorBox: false,
       });
-      fetch("http://localhost:5000/newUser", {
+      fetch(`${ApiUrl}/newUser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

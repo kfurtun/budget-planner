@@ -15,6 +15,7 @@ import { Copyright } from "../Copyright";
 import { useNavigate, Link } from "react-router-dom";
 import { loggedInUserState } from "../states";
 import { useRecoilState } from "recoil";
+import { ApiUrl } from "../../Constants";
 
 export const LoginPartial = () => {
   const [input, setInput] = React.useState({ email: "", password: "" });
@@ -31,10 +32,7 @@ export const LoginPartial = () => {
     event.preventDefault();
 
     fetch(
-      "http://127.0.0.1:5000/login?email=" +
-        input.email +
-        "&password=" +
-        input.password
+      `${ApiUrl}/login?email=` + input.email + "&password=" + input.password
     )
       .then((response) => {
         if (response.ok) {
