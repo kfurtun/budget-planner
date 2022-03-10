@@ -3,4 +3,6 @@
 //     ? "https://budget-planner-api.azurewebsites.net/"
 //     : "http://127.0.0.1:5000";
 
-export const ApiUrl = "https://budget-planner-api.azurewebsites.net/";
+// export const ApiUrl = "https://budget-planner-api.azurewebsites.net/";
+
+export const ApiUrl = "http://127.0.0.1:5000";
