@@ -23,5 +23,5 @@ This is a web app that allows users to organize their budget. Users can login, e
 
 ## Screenshots
 
-<img src="./images/sign-in-page.png" width="500"/>
+<img src="./images/sign-in-page.png" />
 More loading...
