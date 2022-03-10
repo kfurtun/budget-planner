@@ -1,7 +1,5 @@
 # Budget Planner App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Introduction
 
 This is a web app that allows users to organize their budget. Users can login, enter their expenses and income, visualize their budget with graphs and pie charts. This app has not been published yet. The purpose of this project is to develop a web app, improve and practice my React, NodeJS and MS SQL skills.
