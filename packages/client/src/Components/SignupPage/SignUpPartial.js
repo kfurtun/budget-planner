@@ -79,7 +79,7 @@ export function SignUpPartial() {
             name: data.FirstName,
           });
           console.log(data);
-          navigate("/content");
+          navigate("/dashboard");
         });
     }
     console.log(loggedInUser);
