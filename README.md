@@ -39,4 +39,7 @@ This is a web app that allows users to organize their budget. Users can login, e
 ### Graphs
 <img src="./images/graphs.gif" />
 
+### Logout
+<img src="./images/logout.gif" />
+
 More loading...
