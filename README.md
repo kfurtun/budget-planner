@@ -23,8 +23,6 @@ This is a web app that allows users to organize their budget. Users can login, e
 
 ## Screenshots
 
-<img src="./images/sign-in-page.png" />
-
 ### Sign-up
 <img src="./images/Sign-up.gif" />
 
@@ -34,5 +32,8 @@ This is a web app that allows users to organize their budget. Users can login, e
 ### Dashboard and Activities
 <img src="./images/dashboard-activities.gif" />
 <img src="./images/activities-2.gif" />
+
+### Monthly Activities
+<img src="./images/monthly-activities.gif" />
 
 More loading...
